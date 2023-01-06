@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Ab initio random structure searching</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/airss/airss';</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contact" href="../../contact.html" />
+    <link rel="prev" title="Gibbs free energy" href="../gibbs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/profess.svg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/profess.svg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../about.html">
+                        About
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install.html">
+                        Install
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user-guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../../examples.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../contact.html">
+                        Contact
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../about.html">
+                        About
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install.html">
+                        Install
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user-guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../../examples.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../contact.html">
+                        Contact
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../aluminum.html">Aluminum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../h-and-h2.html">H and H2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../magnesium.html">Magnesium</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More advanced</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gibbs.html">Gibbs free energy</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Ab initio random structure searching</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="ab-initio-random-structure-searching">
+<h1>Ab initio random structure searching<a class="headerlink" href="#ab-initio-random-structure-searching" title="Permalink to this heading">#</a></h1>
+<p>This example illustrates crystal structure prediction with ab initio
+random structure searching
+(<a class="reference external" href="https://www.mtg.msm.cam.ac.uk/Codes/AIRSS">AIRSS</a>).</p>
+<p>The first step is to generate random structures, having sensible initial
+volumes and interatomic distances but otherwise unconstrained (at least in this
+example).  Then, one relaxes each to a local minimum in the potential energy
+landscape and analyzes the results. The procedure is simple but effective for
+predicting crystal structures entirely from first principles.</p>
+<section id="seed-file">
+<h2>Seed file<a class="headerlink" href="#seed-file" title="Permalink to this heading">#</a></h2>
+<p>The AIRSS package generates structures based on a seed file, assumed here to be
+named <code class="docutils literal notranslate"><span class="pre">Mg.cell</span></code>. For a magnesium search over structures with 2-4 atoms, a
+reasonable seed would be</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#SPECIES=Mg%NUM=2-4
+#TARGVOL=2.5-3.0
+#MINSEP=1.5
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">TARGVOL</span></code> keyword sets the range of volumes (per atom) permitted in the
+random structures. Any structures with atoms closer than <code class="docutils literal notranslate"><span class="pre">MINSEP</span></code> are rejected.</p>
+</section>
+<section id="structure-relaxations">
+<h2>Structure relaxations<a class="headerlink" href="#structure-relaxations" title="Permalink to this heading">#</a></h2>
+<p>To perform the search we require a <code class="docutils literal notranslate"><span class="pre">relax.py</span></code> script, which accepts a random
+structure as input and optimizes the geometry with <code class="docutils literal notranslate"><span class="pre">profess</span></code>. An example
+script is provided here.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), &#39;../../../../external/ase/&#39;))
+from ase import Atoms
+import ase.io
+
+import profess
+import ase_tools
+
+to_eV_per_A3 = 1.0 / 160.2177 # from GPa
+to_Ha_per_B3 = 1.0 / 29421.02648 # from GPa
+
+#------------------------------------------------
+
+# Collect command line input and load random structure
+pressure = float(sys.argv[1])
+seed = sys.argv[2]
+element = seed.split(&#39;-&#39;)[0][2:]
+atoms = ase.io.read(seed + &#39;.xyz&#39;)
+box_vectors = atoms.cell[...]
+xyz_coords = atoms.get_positions()
+
+# Relax in stages to refresh the grid periodically
+stage = 0
+num_converged = 0
+while stage &lt; 100:
+    stage += 1
+    print(&#39;---------- STAGE {} ----------&#39;.format(stage))
+    steps_per_stage = 20
+    if stage &lt;= 3:  # use short stages at first
+        steps_per_stage = 3
+
+    # Build system and relax geometry
+    energy_cutoff = 600
+    potential = &#39;../potentials/&#39; + element.lower() + &#39;.gga.recpot&#39;
+    system = (
+        profess.System.create(box_vectors, energy_cutoff, [&#39;a&#39;,&#39;ev&#39;])
+        .add_ions(potential, xyz_coords, &#39;a&#39;)
+        .add_electrons()
+        .add_generic_nonlocal_a_functional(       # kinetic energy
+            (5+np.sqrt(5))/6,
+            (5-np.sqrt(5))/6,
+            lambda x: np.exp(x),
+            lambda x: np.exp(x))
+        .add_hartree_functional()                 # electrostatic energies
+        .add_ion_electron_functional()
+        .add_ion_ion_interaction()
+        .add_perdew_burke_ernzerhof_functional()  # exchange-correlation
+    ).minimize_energy()
+    converged = ase_tools.minimize_forces_stress(
+        system,
+        &#39;BFGSLineSearch&#39;,
+        tol=2e-4,
+        steps=steps_per_stage,
+        scalar_pressure=pressure*to_Ha_per_B3)
+    box_vectors = np.array(system.box_vectors(&#39;a&#39;))
+    xyz_coords = np.array(system.ions_xyz_coords(&#39;a&#39;))
+
+    # If converged twice, output final structure and fake castep file
+    if converged:
+        num_converged += 1
+    if num_converged == 2:
+        atoms = Atoms(element+str(xyz_coords.shape[0]),
+                      positions=xyz_coords,
+                      cell=box_vectors),
+        ase.io.write(seed + &#39;-out.xyz&#39;, atoms, &#39;extxyz&#39;)
+        volume = system.volume(&#39;a3&#39;)
+        pressure = system.pressure(&#39;gpa&#39;)
+        enthalpy = system.enthalpy(&#39;ev&#39;)
+        with open(seed + &#39;.castep&#39;, &#39;w&#39;) as f:
+            f.write(&quot;Current cell volume = {:25.15f} A**3\n&quot;.format(volume))
+            f.write(&quot;*  Pressure:   {:25.15f}\n&quot;.format(pressure))
+            f.write(&quot;Python: Final Enthalpy     = {:25.15f} eV\n&quot;.format(enthalpy))
+        break
+</pre></div>
+</div>
+</section>
+<section id="performing-the-search">
+<h2>Performing the search<a class="headerlink" href="#performing-the-search" title="Permalink to this heading">#</a></h2>
+<p>One initiates a search via the command line</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>airss.pl -python -max 10 -seed Mg
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">-max</span></code> sets the number of initial random structures.</p>
+</section>
+<section id="analyzing-the-results-of-a-search">
+<h2>Analyzing the results of a search<a class="headerlink" href="#analyzing-the-results-of-a-search" title="Permalink to this heading">#</a></h2>
+<p>Other AIRSS tools analyze the results. The command</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ca -r
+</pre></div>
+</div>
+<p>might produce (without the column labels)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  identifier           pressure  volume      energy  num           space group
+
+Mg-12790-5343-2         -0.00    23.099     -24.221   2 Mg           P63/mmc        1
+Mg-12790-5343-3          0.00    23.096       0.000   4 Mg           P63/mmc        1
+Mg-12790-5343-1          0.00    23.094       0.001   4 Mg           P63/mmc        1
+Mg-12790-5343-6          0.01    23.090       0.002   2 Mg           P63/mmc        1
+Mg-12790-5343-5          0.00    23.122       0.002   3 Mg           R-3m           1
+Mg-12790-5343-7         -0.00    23.214       0.009   3 Mg           I4/mmm         1
+Mg-12790-5343-8         -0.00    23.215       0.009   3 Mg           I4/mmm         1
+Mg-12790-5343-4          0.00    23.215       0.009   2 Mg           I4/mmm         1
+Mg-12790-5343-9          0.00    23.212       0.009   4 Mg           I4/mmm         1
+Mg-12790-5343-10         0.01    23.210       0.010   3 Mg           I4/mmm         1
+</pre></div>
+</div>
+<p>Each structure appears once, ranked by energy. The lowest-energy structure,
+having space group P63/mmc, is the HCP structure investigated in another
+example. Alternatively, for these same results, the command</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ca -u 0.01 -r
+</pre></div>
+</div>
+<p>would produce</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Mg-12790-5343-2         -0.00    23.099     -24.221   2 Mg           P63/mmc        4
+Mg-12790-5343-5          0.00    23.122       0.002   3 Mg           R-3m           1
+Mg-12790-5343-7         -0.00    23.214       0.009   3 Mg           I4/mmm         5
+</pre></div>
+</div>
+<p>Similar structures (based on a tolerance value 0.01) are now united into a
+single row. The rightmost column indicates frequency—in this case, the HCP
+structure was discovered 4 times, and R-3m and I4/mmm structures were found
+1 and 5 times, respectively. The same <code class="docutils literal notranslate"><span class="pre">ca</span> <span class="pre">-u</span> <span class="pre">0.01</span> <span class="pre">-r</span></code> command, after a search
+of 100 structures having between 2-8 atoms, might yield</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Mg-19149-2215-4         -0.01    23.100     -24.222   2 Mg           P63/mmc       26
+Mg-19149-2215-8         -0.01    23.128       0.002   3 Mg           R-3m          12
+Mg-19149-2215-35        -0.01    23.218       0.009   2 Mg           I4/mmm        56
+Mg-19149-2215-77        -0.00    23.241       0.010   3 Mg           Fmmm           2
+Mg-19149-2215-47        -0.00    23.243       0.010   2 Mg           Fmmm           2
+Mg-19149-2215-9         -0.00    23.268       0.024   8 Mg           C2/m           2 
+</pre></div>
+</div>
+<p>The larger search will require several hours on a laptop.</p>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seed-file">
+   Seed file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structure-relaxations">
+   Structure relaxations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performing-the-search">
+   Performing the search
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-the-results-of-a-search">
+   Analyzing the results of a search
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/examples/airss/airss.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2019-2021, William C. Witt.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="theme-version">
+    Built with the
+    <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">
+        PyData Sphinx Theme
+    </a>
+    0.12.0.
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

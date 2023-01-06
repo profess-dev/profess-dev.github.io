@@ -1,0 +1,6 @@
+﻿profess.System.add\_generic\_nonlocal\_a\_functional
+====================================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_generic_nonlocal_a_functional

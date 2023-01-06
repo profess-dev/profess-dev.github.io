@@ -1,0 +1,6 @@
+﻿profess.System.add\_thomas\_fermi\_functional
+=============================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_thomas_fermi_functional

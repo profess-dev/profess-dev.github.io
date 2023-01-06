@@ -1,0 +1,6 @@
+﻿profess.System.add\_electrons
+=============================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_electrons

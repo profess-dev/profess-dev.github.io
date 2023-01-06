@@ -1,0 +1,6 @@
+﻿profess.System.add\_wang\_teter\_functional
+===========================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_wang_teter_functional

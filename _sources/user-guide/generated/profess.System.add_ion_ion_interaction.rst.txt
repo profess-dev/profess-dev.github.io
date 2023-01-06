@@ -1,0 +1,6 @@
+﻿profess.System.add\_ion\_ion\_interaction
+=========================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_ion_ion_interaction

@@ -1,0 +1,6 @@
+﻿profess.System.create
+=====================
+
+.. currentmodule:: profess
+
+.. automethod:: System.create

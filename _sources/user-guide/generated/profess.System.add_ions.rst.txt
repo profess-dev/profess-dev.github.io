@@ -1,0 +1,6 @@
+﻿profess.System.add\_ions
+========================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_ions

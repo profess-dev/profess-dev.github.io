@@ -1,0 +1,6 @@
+﻿profess.System.electron\_density
+================================
+
+.. currentmodule:: profess
+
+.. autoproperty:: System.electron_density

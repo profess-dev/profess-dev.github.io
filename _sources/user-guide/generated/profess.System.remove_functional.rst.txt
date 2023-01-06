@@ -1,0 +1,6 @@
+﻿profess.System.remove\_functional
+=================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.remove_functional

@@ -1,0 +1,6 @@
+﻿profess.System.stress
+=====================
+
+.. currentmodule:: profess
+
+.. automethod:: System.stress

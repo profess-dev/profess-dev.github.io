@@ -1,0 +1,6 @@
+﻿profess.System.add\_hartree\_functional
+=======================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_hartree_functional

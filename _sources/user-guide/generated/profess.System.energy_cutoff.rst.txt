@@ -1,0 +1,6 @@
+﻿profess.System.energy\_cutoff
+=============================
+
+.. currentmodule:: profess
+
+.. automethod:: System.energy_cutoff

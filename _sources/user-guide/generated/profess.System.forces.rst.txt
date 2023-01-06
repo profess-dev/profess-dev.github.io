@@ -1,0 +1,6 @@
+﻿profess.System.forces
+=====================
+
+.. currentmodule:: profess
+
+.. automethod:: System.forces

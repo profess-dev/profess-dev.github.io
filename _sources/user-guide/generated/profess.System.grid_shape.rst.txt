@@ -1,0 +1,6 @@
+﻿profess.System.grid\_shape
+==========================
+
+.. currentmodule:: profess
+
+.. autoproperty:: System.grid_shape

@@ -1,0 +1,6 @@
+﻿profess.System.minimize\_energy\_tpsd
+=====================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.minimize_energy_tpsd

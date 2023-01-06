@@ -1,0 +1,6 @@
+﻿profess.System.add\_perdew\_burke\_ernzerhof\_functional
+========================================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_perdew_burke_ernzerhof_functional

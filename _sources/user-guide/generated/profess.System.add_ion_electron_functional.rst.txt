@@ -1,0 +1,6 @@
+﻿profess.System.add\_ion\_electron\_functional
+=============================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_ion_electron_functional

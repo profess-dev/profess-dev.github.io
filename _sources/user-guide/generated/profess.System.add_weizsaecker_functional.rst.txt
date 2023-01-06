@@ -1,0 +1,6 @@
+﻿profess.System.add\_weizsaecker\_functional
+===========================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_weizsaecker_functional

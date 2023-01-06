@@ -1,0 +1,6 @@
+﻿profess.System.add\_wang\_govind\_carter\_1999\_i\_functional
+=============================================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_wang_govind_carter_1999_i_functional

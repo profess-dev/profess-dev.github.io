@@ -1,0 +1,6 @@
+﻿profess.System.add\_huang\_carter\_functional
+=============================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_huang_carter_functional

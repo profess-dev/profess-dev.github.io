@@ -1,0 +1,6 @@
+﻿profess.System.add\_luo\_karasiev\_trickey\_functional
+======================================================
+
+.. currentmodule:: profess
+
+.. automethod:: System.add_luo_karasiev_trickey_functional
